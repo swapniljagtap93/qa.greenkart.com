@@ -20,8 +20,11 @@ public class LandingPageStepDefinition {
     @Given("User is on GreenKart Landing page")
     public void user_is_on_green_kart_landing_page() {
 
+//        System.setProperty("webdriver.chrome.driver",
+//                "C:\\Users\\DELL\\eclipse-workspace\\qa.greenkart.com\\src\\test\\resources\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\DELL\\eclipse-workspace\\qa.greenkart.com\\src\\test\\resources\\chromedriver.exe");
+                System.getProperty("user.dir") + "/src/test/resources/chromedriver.exe");
+
         driver = new ChromeDriver();
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
