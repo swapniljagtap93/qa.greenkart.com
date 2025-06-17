@@ -2,7 +2,9 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import pageObjects.OffersPage;
 import utils.TestContextSetup;
 
 import java.util.Iterator;
@@ -11,7 +13,7 @@ import java.util.Set;
 public class OffersPageStepDefinition {
     public String offerPageProductName;
     TestContextSetup testContextSetup;
-
+    OffersPage offersPage;
     public OffersPageStepDefinition(TestContextSetup testContextSetup) {
         this.testContextSetup = testContextSetup;
     }
@@ -19,9 +21,10 @@ public class OffersPageStepDefinition {
     @Then("User searched for {string} shortname in offers page")
     public void user_searched_for_the_same_shortname_in_offers_page(String shortName) throws InterruptedException {
         Switch_to_offers_page();
-        testContextSetup.driver.findElement(By.id("search-field")).sendKeys(shortName);
+        offersPage=new OffersPage(testContextSetup.driver);
+        offersPage.searchForProduct(shortName);
         Thread.sleep(2000);
-        offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
+        offerPageProductName=  offersPage.getProductName();
     }
 
     public void Switch_to_offers_page() {
