@@ -1,10 +1,7 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import utils.TestContextSetup;
 
@@ -21,15 +18,18 @@ public class OffersPageStepDefinition {
 
     @Then("User searched for {string} shortname in offers page")
     public void user_searched_for_the_same_shortname_in_offers_page(String shortName) throws InterruptedException {
-        testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
+        Switch_to_offers_page();
+        testContextSetup.driver.findElement(By.id("search-field")).sendKeys(shortName);
+        Thread.sleep(2000);
+        offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
+    }
+
+    public void Switch_to_offers_page() {
         Set<String> windows = testContextSetup.driver.getWindowHandles();
         Iterator<String> it = windows.iterator();
         String parentWindow = it.next();
         String childWindow = it.next();
         testContextSetup.driver.switchTo().window(childWindow);
-        testContextSetup.driver.findElement(By.id("search-field")).sendKeys(shortName);
-        Thread.sleep(2000);
-        offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
     }
 
     @Then("Validate product name in offers page matches with Landing page")

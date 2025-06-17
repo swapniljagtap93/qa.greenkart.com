@@ -1,18 +1,13 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import utils.TestContextSetup;
 
-import java.util.Iterator;
-import java.util.Set;
-
 public class LandingPageStepDefinition {
-    public String offerPageProductName;
+
     TestContextSetup testContextSetup;
 
     public LandingPageStepDefinition(TestContextSetup testContextSetup) {
@@ -35,6 +30,11 @@ public class LandingPageStepDefinition {
         Thread.sleep(2000);
         testContextSetup.landingPageProductName = testContextSetup.driver.findElement(By.cssSelector("h4.product-name")).getText().split("-")[0].trim();
         System.out.println(testContextSetup.landingPageProductName + " is extracted from the Home page");
+    }
+
+    @When("User click on Top Deals link in the Landing Page")
+    public void user_click_on_top_deals_link_in_the_landing_page() {
+        testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
     }
 
 }
