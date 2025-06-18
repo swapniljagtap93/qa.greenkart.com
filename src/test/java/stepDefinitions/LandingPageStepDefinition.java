@@ -2,7 +2,6 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.LandingPage;
 import pageObjects.PageObjectsManager;
 import utils.TestContextSetup;
@@ -20,17 +19,14 @@ public class LandingPageStepDefinition {
     @Given("User is on GreenKart Landing page")
     public void user_is_on_green_kart_landing_page() {
 
-        System.setProperty("webdriver.chrome.driver",
-                System.getProperty("user.dir") + "/src/test/resources/chromedriver.exe");
 
-        testContextSetup.driver = new ChromeDriver();
-        testContextSetup.driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
     }
 
     @When("User searched with shortname {string} and extracted actual name of product")
     public void user_searched_with_shortname_and_extracted_actual_name_of_product(String shortName) throws InterruptedException {
-        pageObjectsManager = new PageObjectsManager(testContextSetup.driver);
-        landingPage = pageObjectsManager.getLandingPage();
+    //    pageObjectsManager = new PageObjectsManager(testContextSetup.driver);
+        // Create pageObjectsManager object in the testContextSetup constructor
+        landingPage = testContextSetup.pageObjectsManager.getLandingPage();
         landingPage.searchForProduct(shortName);
         Thread.sleep(2000);
         testContextSetup.landingPageProductName = landingPage.getProductName();
