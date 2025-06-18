@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 public class PageObjectsManager {
     public WebDriver driver;
-    LandingPage landingPage;
-    OffersPage offersPage;
+    public LandingPage landingPage;
+    public OffersPage offersPage;
 
     public PageObjectsManager(WebDriver driver) {
         this.driver = driver;
