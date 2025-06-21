@@ -1,3 +1,4 @@
+@Test
 Feature: Search and place the order for the Products
 
   Scenario: Search experience for the product search in both Home page and Offers page
@@ -7,3 +8,8 @@ Feature: Search and place the order for the Products
     And User click on Top Deals link in the Landing Page
     Then User searched for "Tom" shortname in offers page
     And Validate product name in offers page matches with Landing page
+
+  Scenario: Verify all the products from the landing page has prices
+    Given User is on GreenKart Landing page
+    When User fetches all the products from the landing page
+    Then User should see all the products and their prices

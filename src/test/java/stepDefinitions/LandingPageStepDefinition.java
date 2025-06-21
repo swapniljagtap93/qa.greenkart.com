@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObjects.LandingPage;
 import pageObjects.PageObjectsManager;
@@ -16,6 +17,10 @@ public class LandingPageStepDefinition {
         this.testContextSetup = testContextSetup;
     }
 
+    public void InitializeLandingPage() {
+        landingPage = testContextSetup.pageObjectsManager.getLandingPage();
+    }
+
     @Given("User is on GreenKart Landing page")
     public void user_is_on_green_kart_landing_page() {
 
@@ -24,7 +29,7 @@ public class LandingPageStepDefinition {
 
     @When("User searched with shortname {string} and extracted actual name of product")
     public void user_searched_with_shortname_and_extracted_actual_name_of_product(String shortName) throws InterruptedException {
-    //    pageObjectsManager = new PageObjectsManager(testContextSetup.driver);
+        //    pageObjectsManager = new PageObjectsManager(testContextSetup.driver);
         // Create pageObjectsManager object in the testContextSetup constructor
         landingPage = testContextSetup.pageObjectsManager.getLandingPage();
         landingPage.searchForProduct(shortName);
@@ -38,4 +43,16 @@ public class LandingPageStepDefinition {
         landingPage.clickTopDeals();
     }
 
+
+    @When("User fetches all the products from the landing page")
+    public void userFetchesAllTheProductsFromTheLandingPage() {
+        InitializeLandingPage();
+        landingPage.getAllProducts();
+    }
+
+    @Then("User should see all the products and their prices")
+    public void userShouldSeeAllTheProductsAndTheirPrices() {
+        InitializeLandingPage();
+        landingPage.checkAssertion();
+    }
 }
