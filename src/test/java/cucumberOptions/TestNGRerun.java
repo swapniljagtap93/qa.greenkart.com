@@ -5,18 +5,17 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions
         (
-                 features = "src/test/java/features",
+                features = "@target//failed-tests//rerun.txt",
                 glue = "stepDefinitions",
                 monochrome = true,
                 tags = "@Test",
                 plugin =
                         { "pretty",
-                        "html:target/cucumber-reports/cucumber.html",
-                        "rerun:target//failed-tests//rerun.txt"
+                        "html:target/cucumber-reports/cucumber.html"
                          }
         )
 
-public class TestNGRunner extends AbstractTestNGCucumberTests {
+public class TestNGRerun extends AbstractTestNGCucumberTests {
 
 
 }

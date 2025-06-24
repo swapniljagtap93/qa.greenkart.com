@@ -8,7 +8,7 @@ public class TestContextSetup {
     public WebDriver driver;
     public String landingPageProductName;
     public PageObjectsManager pageObjectsManager;
-    TestBase testBase;
+    public TestBase testBase;
     public GenericUtils genericUtils;
 
     public TestContextSetup() {
